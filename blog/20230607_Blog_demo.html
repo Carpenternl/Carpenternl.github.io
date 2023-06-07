@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <md-doc>
+        <template>
+            <h1 pattern="^#\s(.*)$" flags="mg"></h1>
+            <b pattern="\*(\w[\w ]*\w)\*" flags="sg"></b>
+            <div pattern="(\s\s\n)" flags="sg"></div>
+            <p pattern="^(\w+?)[\s\n]$" flags="sg"></p>
+        </template>
+        <section slot="markdown">
+            # Hello World
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.  
+            Enim excepturi id ut! Corrupti iure porro corporis nostrum debitis ut atque voluptatum pariatur qui voluptas, aliquid est quam aperiam eos aspernatur?
+
+            *bold text*
+        </section>
+
+    </md-doc>
+    <script>
+        class MdDocument extends HTMLElement{
+            constructor(){
+                super();
+                console.log('this');
+                this.attachShadow({mode:'open'});
+            }
+            get template(){
+                return this.querySelector('template')?.content??null;
+            }
+            connectedCallback(){
+                let inputString = this.querySelector('[slot=markdown]').innerHTML;
+                this.template.querySelectorAll('[pattern]').forEach(el=>{
+                    const pattern = new RegExp(el.getAttribute('pattern'),el.getAttribute('flags'));
+                    console.log(el.getAttribute('pattern'),el.getAttribute('flags'),pattern);
+                    inputString = inputString.replace(pattern,`<${el.tagName.toLowerCase()}>$1</${el.tagName.toLowerCase()}`)
+                });
+                this.shadowRoot.innerHTML=`<slot name='_markdown'>${inputString}</slot>`
+            }
+        }
+        customElements.define('md-doc',MdDocument);
+    </script>
+    
+</body>
+</html>

@@ -5,8 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer type="module" src="./script.js"></script>
 </head>
 <body>
-    Hello
+    <menu-bar>
+        <li class="menu-item">
+            <a href="html/home" class="button"  target="#main_view">home</a>
+        </li>
+        <li hidden class="menu-item">
+            <a href="html/projects/site" class="button" target="#main_view">about this site</a>
+        </li>
+    </menu-bar>
+    <main-html id="main_view" src="html/home">
+    </main-html>
 </body>
 </html>

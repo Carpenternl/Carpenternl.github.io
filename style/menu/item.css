@@ -1,0 +1,6 @@
+li.menu-item:not([hidden]){
+    display: block;
+}
+[role=menu-item]{
+
+}

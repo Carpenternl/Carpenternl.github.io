@@ -1,0 +1,28 @@
+@import url('./menu/item.css');
+.menu-bar{
+    position: sticky;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: auto hidden;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+menu-bar:defined{
+    display: contents;
+}
+.menu-bar{
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+}
+/*menu */
+.menu-bar>li{
+    display: block;
+}
+/* menu-item>li*/
+menu-item:defined{
+    display: contents;
+}
